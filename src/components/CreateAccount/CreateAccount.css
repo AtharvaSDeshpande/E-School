@@ -1,0 +1,62 @@
+.createAccount{
+    
+    background: white;
+    display: grid;
+    place-items: center;
+}
+.createForm{
+    background: #ffffff;
+    text-align: center;
+    padding: 20px;
+    margin: 20px;
+}
+.create_img {
+    object-fit: contain;
+    height: 55px;
+}
+
+.create_submit{
+    background: #F50057;
+    cursor: pointer;
+     border-radius: 4px;
+     opacity: 1;
+     border: 0;
+     width: 248px;
+     height: 44px;
+     color: #FFFFFF;
+     text-align: center;
+     letter-spacing: 1.6px;
+     font-size: 16px;
+     text-transform: uppercase;
+     opacity: 1;
+     margin-top: 10px;
+}
+
+.create_submit> p 
+{
+    text-align: center;
+    letter-spacing: 1.6px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    opacity: 1;
+    font-size: 16px;
+    cursor: pointer;
+}
+.buttons{
+    display: flex;
+    flex-direction: column;
+}
+.create__header{
+    color: #919194;
+}
+.create__header  > h1{
+    color: black;
+}
+.create__header > .link{
+    text-decoration: none;
+    color: #DC004E;
+}
+@media (max-width: 500px) {
+
+    
+}

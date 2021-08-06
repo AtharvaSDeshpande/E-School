@@ -11,10 +11,10 @@ import { Link } from 'react-router-dom';
 import { useStateValue } from '../../StateProvider';
 import { actionTypes } from '../../reducer';
 import { Assessment } from '@material-ui/icons';
-import { auth } from '../../firebase';
-
-
-function getModalStyle() {
+import db, { auth } from '../../firebase';
+import { v4 as uuidv4 } from 'uuid';
+import crypto from 'crypto';
+const getModalStyle = ()=> {
     const top = 50;
     const left = 50;
 
@@ -61,10 +61,11 @@ function Header() {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [className, setClassName] = useState();
-    const [section, setSection] = useState();
-    const [subject, setSubject] = useState();
-    const [room, setRoom] = useState();
+    const [section, setSection] = useState(null);
+    const [semester, setSemester] = useState(null);
+    const [acadamicYear, setAcadamicYear] = useState(null);
     const [joinClassCode,setJoinClassCode] =useState();
+    const salt =  "311f954e-7fee-4f4c-8ed8-7079d0ed2cd0";
     // const [createDocId,setCreateDocId] = useState();
     const [classData,setClassData] = useState({});
     const handleModalClose = () => {
@@ -78,7 +79,73 @@ function Header() {
         });
         auth.signOut()
     }
-
+    const createClass = (e) => {
+        e.preventDefault()
+        if(className)
+        {
+            // alert (salt)
+            var displayID = uuidv4();
+            displayID = displayID[0] + displayID[1] + displayID[2] + displayID[3] + displayID[4] + displayID[5];
+            const id = crypto.createHmac('sha256',salt).update(displayID).digest('hex');
+            db.collection("users").doc(user.email).collection("classes").doc(id).set({
+                "id": id,
+                "isTeacher": true, 
+            });
+            db.collection("classes").doc(id).set({
+                "name": className,
+                "section": section,
+                "semester": semester,
+                "acadamicYear": acadamicYear,
+                "displayID": displayID,
+                "displayName": user.displayName,
+            });
+            db.collection("classes").doc(id).collection("users").doc(user.email).set({
+                "id": user.email,
+                "isTeacher": true, 
+            });
+        handleModalClose();
+        }
+        
+    }
+const joinClass = (e) => {
+            e.preventDefault();
+            if (joinClassCode)
+            {
+                const id = crypto.createHmac('sha256',salt).update(joinClassCode).digest('hex');
+                db.collection("classes").doc(id).get().then((result) => {
+                    console.log(result)
+                    if (result.exists)
+                    {
+                        db.collection("users").doc(user.email).collection("classes").doc(id).get().then((res) => {
+                            if (!res.exists)
+                            {
+                                 db.collection("users").doc(user.email).collection("classes").doc(id).set({
+                                    "id": id,
+                                    "isTeacher": false, 
+                                    
+                                })
+                                db.collection("classes").doc(id).collection("users").doc(user.email).set({
+                                    "id": user.email,
+                                    "isTeacher": false, 
+                                    
+                                })
+                                handleModalClose();
+                            }
+                            else
+                            {
+                                alert("Alrady Enrolled in class");
+                            }
+                        })
+                       
+                    }   
+                    else
+                    {
+                        alert("Please Enter a valid code")
+                    }
+                }).catch(alert);
+            }
+            
+        }
     return (
         <div className="header">
             <div className="header__left">
@@ -131,12 +198,12 @@ function Header() {
                     <form className="createClass">
                         <Input placeholder="Class Name (Required)" type="text" onChange={(e) => setClassName(e.target.value)} required />
                         <Input placeholder="Section" type="text" onChange={(e) => setSection(e.target.value)} />
-                        <Input placeholder="Subject" type="text" onChange={(e) => setSubject(e.target.value)} />
+                        <Input placeholder="Semester" type="text" onChange={(e) => setSemester(e.target.value)} />
 
-                        <Input placeholder="Room" type="text" onChange={(e) => setRoom(e.target.value)} />
+                        <Input placeholder="Acadamic Year" type="text" onChange={(e) => setAcadamicYear(e.target.value)} />
 
 
-                        <Button  variant="contained" color="secondary" type="submit"  className="createButton">Create</Button>
+                        <Button  variant="contained" color="secondary" type="submit"  className="createButton" onClick = {createClass}>Create</Button>
 
                     </form>
                 </div>
@@ -150,7 +217,7 @@ function Header() {
                     <form className="joinClass">
                         
                         <Input placeholder="Enter Class Code (Required)" type="text" onChange={(e) => setJoinClassCode(e.target.value)}  required />
-                        <Button  variant="contained" color="secondary" type="submit" className="joinButton">Create</Button>
+                        <Button  variant="contained" color="secondary" type="submit" className="joinButton" onClick = {joinClass}>Create</Button>
                     </form>
                 </div>
             </Modal>

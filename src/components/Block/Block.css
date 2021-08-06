@@ -15,6 +15,9 @@
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 }
+.created{
+    background-color: #d53e33;  
+}
 .block__title__header{
     width: 280px;
     margin-top: 10px;

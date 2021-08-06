@@ -4,14 +4,14 @@ import './Block.css'
 
 import { Tooltip } from '@material-ui/core';
 
-function Block({id,myClassName,Subject,photoURL,displayName,isCreated,active}) {
+function Block({id,myClassName,semester,acadamicYear,displayName,isTeacher,active}) {
     
     return (
         <div className = "block">
-            <div className = "block__title">
-                <h1 className = "block__title__header">DAA</h1>
-                <p className = "block__title_details">2020-2021 Sem 2</p>
-                <p className = "block__title_details">Atharva Deshpande</p>
+            <div className = {`block__title ${isTeacher && 'created'}`}>
+                <h1 className = "block__title__header">{myClassName}</h1>
+                <p className = "block__title_details">{acadamicYear}</p>
+                <p className = "block__title_details">{displayName}</p>
 
             </div>
             <div className = "block__todo">

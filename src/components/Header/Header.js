@@ -61,9 +61,9 @@ function Header() {
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
     const [className, setClassName] = useState();
-    const [section, setSection] = useState(null);
-    const [semester, setSemester] = useState(null);
-    const [acadamicYear, setAcadamicYear] = useState(null);
+    const [section, setSection] = useState("");
+    const [semester, setSemester] = useState("");
+    const [acadamicYear, setAcadamicYear] = useState("");
     const [joinClassCode,setJoinClassCode] =useState();
     const salt =  "311f954e-7fee-4f4c-8ed8-7079d0ed2cd0";
     // const [createDocId,setCreateDocId] = useState();

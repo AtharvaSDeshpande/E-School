@@ -69,17 +69,11 @@ function Header() {
                 </div>
                 <div className="cheader__right">
                     <Tooltip title="Dashboard"><Assessment className="cheader__right_icon" /></Tooltip>
-                    {
-                        user ?
-                            (
+               
                                 <Avatar className={`header__right_avatar ${color} pointer`} onClick={handleClick}>
                                     {user.displayName.split(' ')[0][0] + user?.displayName.split(' ')[1][0]}
                                 </Avatar>
-                            ) :
-                            (<Link className="cheader__link" to="/login">
-                                <Avatar className={`header__right_avatar`} ></Avatar>
-                            </Link>)
-                    }
+                            
                 </div>
 
                 <Menu
@@ -92,7 +86,7 @@ function Header() {
                 >
                     <Link to="/profile" className="cheader__link"><MenuItem onClick={handleClose}>Profile</MenuItem></Link>
                     <Link to="/labs" className="cheader__link"><MenuItem onClick={handleClose}>Labs</MenuItem></Link>
-                    <Link to="/login" className="cheader__link"><MenuItem onClick={logout}>Logout</MenuItem></Link>
+                    <Link to="/" className="cheader__link"><MenuItem onClick={logout}>Logout</MenuItem></Link>
                 </Menu>
 
             </div>

@@ -128,7 +128,7 @@ function CreateAccount() {
 			<form action="/" className="createForm" onSubmit={formik.handleSubmit}>
 
 				<img className="create_img" src={logo} alt="Logo" />
-				<div className="create__header"><h1>Create Account</h1>or <Link to="/login" className="link" color="secondary.main">Login</Link></div>
+				<div className="create__header"><h1>Create Account</h1>or <Link to="/" className="link" color="secondary.main">Login</Link></div>
 				{/* Name */}
 				<div className="inputBlock">
 					<p className="inputBlock__label"><b>First Name</b></p>

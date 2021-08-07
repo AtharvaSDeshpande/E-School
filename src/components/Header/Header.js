@@ -188,7 +188,7 @@ const joinClass = (e) => {
             >
                 <Link to = "/profile"  className = "header__link"><MenuItem onClick={handleClose}>Profile</MenuItem></Link>
                 <Link to = "/labs"  className = "header__link"><MenuItem onClick={handleClose}>Labs</MenuItem></Link>
-                <Link to = "/login"  className = "header__link"><MenuItem onClick={logout}>Logout</MenuItem></Link>
+                <Link to = "/"  className = "header__link"><MenuItem onClick={logout}>Logout</MenuItem></Link>
             </Menu>
             <Modal className="modal"
                 open={OpenCreate}

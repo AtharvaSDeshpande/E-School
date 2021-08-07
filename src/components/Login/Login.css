@@ -49,6 +49,7 @@
 .link,.login__header > .link{
     text-decoration: none;
     color: #DC004E;
+    cursor:pointer
 }
 @media (max-width: 500px) {
 

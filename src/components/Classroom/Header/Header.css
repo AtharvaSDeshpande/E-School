@@ -1,0 +1,177 @@
+.cheader{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid rgb(192, 191, 191);
+}
+
+.cheader__left{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+   
+}
+.cheader__right{
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.cheader__left_icon {
+    margin: 10px;
+    color: #5F6368;
+    font-size: 25px !important;
+    cursor: pointer;
+}
+.cheader__middle{
+    display: flex;
+    align-items: center;
+}
+.streamLink_active{
+    color: rgb(218, 92, 117)!important;
+    font-weight: bold;
+    /* color: gray !important; */
+    margin: 10px;
+    text-decoration: none;
+}
+.streamLink{
+   
+    font-weight: bold;
+    color: gray;
+    margin: 10px;
+    text-decoration: none;
+}
+.cheader__right_icon {
+    margin: 10px;
+    color: #5F6368;
+    font-size: 25px !important;
+    cursor: pointer;
+}
+.cheader__right_avatar{
+    text-transform: uppercase;
+    margin: 10px;
+    text-align: center !important;
+}
+.cheader__left_img {
+    margin: 10px;
+    object-fit: contain;
+    height: 30px;
+}
+
+ .addMenu {
+     margin-top: 50px;
+     text-align: center;
+     align-self: center;
+ }
+ .addMenu2 {
+    
+    margin-top: 30px;
+    text-align: center;
+    align-self: center;
+}
+
+ .createClass {
+    display: flex;
+    flex-direction: column;
+}
+
+   .createButton {
+    margin: 10px !important;
+   
+}
+.joinClass{
+    display: flex;
+    flex-direction: column;
+}
+
+.joinClass > .joinButton {
+    margin: 10px !important;
+   
+}
+
+.activeButton {
+    border-bottom:2px solid blue !important;
+}
+
+.cheader__link{
+    text-decoration: none ;
+    color: black;
+}
+.pointer {
+    cursor: pointer;
+}
+
+.nav_buttons{
+    display: none;
+}
+.cheader__1{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    
+}
+
+
+@media (max-width: 800px) {
+    .nav_buttons{
+        display: flex;
+        justify-content: center;
+    }
+    .cheader__middle{
+        display: none;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ .red {
+    background-color: red !important;
+}
+.purple {
+    background-color: purple !important;
+}
+.blue{
+    background-color: blue !important;
+}
+.violet{
+    background-color: violet !important;
+}
+.orange{
+    background-color: rgb(255, 102, 0) !important;
+}
+.pink{
+    background-color:#EC407A !important;
+}
+.green {
+    background-color: green !important;
+}
+
+.teal {
+    background-color: teal !important;
+}
+.yellow {
+    background-color: yellowgreen !important;
+}
+ 
+ .black {
+    background-color: black !important;
+ }

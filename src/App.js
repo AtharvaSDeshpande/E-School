@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { useStateValue } from './StateProvider';
 import { auth } from './firebase';
 import { actionTypes } from './reducer';
+import Classroom from './components/Classroom/Classroom';
 
 
 function App() {
@@ -38,6 +39,9 @@ function App() {
 					</Route>
 					<Route path="/profile">
 						<Profile />
+					</Route>
+					<Route path="/class">
+						<Classroom />
 					</Route>
 					<Route path="/">
 						<LandingPage />

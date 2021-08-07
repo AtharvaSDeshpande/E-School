@@ -18,6 +18,13 @@
 .created{
     background-color: #d53e33;  
 }
+.link:hover{
+    text-decoration: underline;
+    text-decoration-color: white;
+}
+.link{
+    text-decoration: none;
+}
 .block__title__header{
     width: 280px;
     margin-top: 10px;

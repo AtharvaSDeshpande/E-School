@@ -5,9 +5,10 @@ import { useStateValue } from '../../StateProvider'
 import Login from '../Login/Login';
 import Block from '../Block/Block';
 import db from '../../firebase';
+import { actionTypes } from '../../reducer';
 
 function LandingPage() {
-    const [{user},dispatch] = useStateValue();
+    const [{user,selectedClass},dispatch] = useStateValue();
     const [classIDs,setClassIDs] = useState([]);
     // var classIDs = [];
     // const [classes,setClasses] = useState();
@@ -16,6 +17,12 @@ function LandingPage() {
        
     // console.log(classIDs) 
     }
+    useEffect(()=>{
+        dispatch({
+            action: actionTypes.SET_CLASS,
+            selectedClass: null
+        })
+    },[dispatch])
     useEffect(()=>{
         // setClassIDs([])
         
@@ -49,7 +56,7 @@ function LandingPage() {
                    
                   {
                   classIDs.map(classID => 
-                (<Block id = {classID.id} myClassName = {classID?.data.name} semester = {classID?.data?.semester} acadamicYear = {classID?.data?.acadamicYear}  displayName = {classID?.data?.displayName} isTeacher = {classID?.isTeacher} active = {a}/>)
+                (<Block id = {classID.id} myClassName = {classID?.data.name} semester = {classID?.data?.semester} acadamicYear = {classID?.data?.acadamicYear}  displayName = {classID?.data?.displayName} isTeacher = {classID?.isTeacher} active = {a} myClass = {classID}/>)
                   )}
                 </div>
             </div>):(<div>

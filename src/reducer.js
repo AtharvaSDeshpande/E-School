@@ -1,9 +1,10 @@
 export const initialState = {
-    user: null
+    user: null,
+    selectedClass: null
 };
 export const actionTypes = {
     SET_USER: "SET_USER",
-    RESET_USER: "RESET_USER"
+    SET_CLASS: "SET_CLASS"
 }
 
 const reducer = (state,action) => {
@@ -14,6 +15,12 @@ const reducer = (state,action) => {
                             ...state,
                             user: action.user,          //  Change the user to what we dispatched
                     };
+        case actionTypes.SET_CLASS:
+            console.log(action.selectedClass)
+            return {
+                    ...state,
+                    selectedClass: action.selectedClass,
+            }                    
         default:
             return state;
     }

@@ -1,0 +1,32 @@
+.people{
+    display: grid;
+    place-items: center;
+   
+}
+
+.people__title{
+    border-bottom: 2px solid #1967D2;
+    height: fit-content;
+    width: 75vw;
+    align-items:center;
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+.people__title__header{
+    font-weight: 600;
+    color: #1967D2;
+    margin: 10px;
+    margin-left: 0;
+}
+
+.people__title__icon{
+    align-self:center;
+    color: #1967D2 !important;
+    font-size: 30px !important;
+    margin: 10px;
+    margin-right: 0;
+}
+
+

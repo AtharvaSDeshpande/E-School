@@ -3,7 +3,6 @@ import { useStateValue } from '../../../StateProvider'
 import LandingPage from '../../LandingPage/LandingPage';
 import Login from '../../Login/Login';
 import './Stream.css'
-import streamtheme from '../../../assets/images/streamtheme.jpg' 
 function Stream() {
     const [{user,selectedClass},dispatch] = useStateValue();
     return (

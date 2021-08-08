@@ -1,29 +1,17 @@
-import React, { useState } from 'react'
-import { Avatar, Input, makeStyles, Tooltip } from '@material-ui/core';
+import React from 'react'
+import { Avatar, Tooltip } from '@material-ui/core';
 import './Header.css'
 import logo from "../../../assets/images/logo.png"
 import MenuIcon from '@material-ui/icons/Menu';
-import AppsIcon from '@material-ui/icons/Apps';
-import AddIcon from '@material-ui/icons/Add';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import { Link, NavLink } from 'react-router-dom';
 import { useStateValue } from '../../../StateProvider';
 import { actionTypes } from '../../../reducer';
 import { Assessment } from '@material-ui/icons';
-import db, { auth } from '../../../firebase';
+import  { auth } from '../../../firebase';
 
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        position: 'absolute',
-        width: '50%',
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-    },
-}))
 function Header() {
     const [{ user, selectedClass }, dispatch] = useStateValue();
 

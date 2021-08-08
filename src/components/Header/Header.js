@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import { Avatar, Button, Input,  makeStyles, Modal, Tooltip } from '@material-ui/core';
+import { Avatar, Button, Input, makeStyles, Modal, Tooltip } from '@material-ui/core';
 import './Header.css'
 import logo from "../../assets/images/logo.png"
 import MenuIcon from '@material-ui/icons/Menu';
-import AppsIcon from '@material-ui/icons/Apps';
 import AddIcon from '@material-ui/icons/Add';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -14,7 +13,7 @@ import { Assessment } from '@material-ui/icons';
 import db, { auth } from '../../firebase';
 import { v4 as uuidv4 } from 'uuid';
 import crypto from 'crypto';
-const getModalStyle = ()=> {
+const getModalStyle = () => {
     const top = 50;
     const left = 50;
 
@@ -35,18 +34,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }))
 function Header() {
-    const [{user},dispatch] = useStateValue();
+    const [{ user }, dispatch] = useStateValue();
 
     const color = user?.photoURL;
     const [addSchoolMenu, setAddSchoolMenu] = useState(null);
     const [profileNav, setProfileNav] = React.useState(null);
 
     const handleClick = (event) => {
-      setProfileNav(event.currentTarget);
+        setProfileNav(event.currentTarget);
     };
-  
+
     const handleClose = () => {
-      setProfileNav(null);
+        setProfileNav(null);
     };
     const handleAddSchoolClick = (event) => {
         setAddSchoolMenu(event.currentTarget);
@@ -56,7 +55,7 @@ function Header() {
         setAddSchoolMenu(null);
     };
 
- const [OpenCreate, setOpenCreate] = useState(false);
+    const [OpenCreate, setOpenCreate] = useState(false);
     const [OpenJoin, setOpenJoin] = useState(false);
     const classes = useStyles();
     const [modalStyle] = React.useState(getModalStyle);
@@ -64,10 +63,10 @@ function Header() {
     const [section, setSection] = useState("");
     const [semester, setSemester] = useState("");
     const [acadamicYear, setAcadamicYear] = useState("");
-    const [joinClassCode,setJoinClassCode] =useState();
-    const salt =  "311f954e-7fee-4f4c-8ed8-7079d0ed2cd0";
+    const [joinClassCode, setJoinClassCode] = useState();
+    const salt = "311f954e-7fee-4f4c-8ed8-7079d0ed2cd0";
     // const [createDocId,setCreateDocId] = useState();
-    const [classData,setClassData] = useState({});
+
     const handleModalClose = () => {
         setOpenCreate(false);
         setOpenJoin(false);
@@ -81,15 +80,14 @@ function Header() {
     }
     const createClass = (e) => {
         e.preventDefault()
-        if(className)
-        {
+        if (className) {
             // alert (salt)
             var displayID = uuidv4();
             displayID = displayID[0] + displayID[1] + displayID[2] + displayID[3] + displayID[4] + displayID[5];
-            const id = crypto.createHmac('sha256',salt).update(displayID).digest('hex');
+            const id = crypto.createHmac('sha256', salt).update(displayID).digest('hex');
             db.collection("users").doc(user.email).collection("classes").doc(id).set({
                 "id": id,
-                "isTeacher": true, 
+                "isTeacher": true,
             });
             db.collection("classes").doc(id).set({
                 "name": className,
@@ -101,94 +99,89 @@ function Header() {
             });
             db.collection("classes").doc(id).collection("users").doc(user.email).set({
                 "id": user.email,
-                "isTeacher": true, 
+                "isTeacher": true,
             });
-        handleModalClose();
+            handleModalClose();
         }
-        
+
     }
-const joinClass = (e) => {
-            e.preventDefault();
-            if (joinClassCode)
-            {
-                const id = crypto.createHmac('sha256',salt).update(joinClassCode).digest('hex');
-                db.collection("classes").doc(id).get().then((result) => {
-                    console.log(result)
-                    if (result.exists)
-                    {
-                        db.collection("users").doc(user.email).collection("classes").doc(id).get().then((res) => {
-                            if (!res.exists)
-                            {
-                                 db.collection("users").doc(user.email).collection("classes").doc(id).set({
-                                    "id": id,
-                                    "isTeacher": false, 
-                                    
-                                })
-                                db.collection("classes").doc(id).collection("users").doc(user.email).set({
-                                    "id": user.email,
-                                    "isTeacher": false, 
-                                    
-                                })
-                                handleModalClose();
-                            }
-                            else
-                            {
-                                alert("Alrady Enrolled in class");
-                            }
-                        })
-                       
-                    }   
-                    else
-                    {
-                        alert("Please Enter a valid code")
-                    }
-                }).catch(alert);
-            }
-            
+    const joinClass = (e) => {
+        e.preventDefault();
+        if (joinClassCode) {
+            const id = crypto.createHmac('sha256', salt).update(joinClassCode).digest('hex');
+            db.collection("classes").doc(id).get().then((result) => {
+                console.log(result)
+                if (result.exists) {
+                    db.collection("users").doc(user.email).collection("classes").doc(id).get().then((res) => {
+                        if (!res.exists) {
+                            db.collection("users").doc(user.email).collection("classes").doc(id).set({
+                                "id": id,
+                                "isTeacher": false,
+
+                            })
+                            db.collection("classes").doc(id).collection("users").doc(user.email).set({
+                                "id": user.email,
+                                "isTeacher": false,
+
+                            })
+                            handleModalClose();
+                        }
+                        else {
+                            alert("Alrady Enrolled in class");
+                        }
+                    })
+
+                }
+                else {
+                    alert("Please Enter a valid code")
+                }
+            }).catch(alert);
         }
+
+    }
     return (
         <div className="header">
             <div className="header__left">
                 <MenuIcon className="header__left_icon" />
-                <Link to = "/"><img className="header__left_img" src={logo} alt="Logo" /></Link>
+                <Link to="/"><img className="header__left_img" src={logo} alt="Logo" /></Link>
             </div>
             <div className="header__right">
-                <Tooltip title = "Create/Join Class"><AddIcon className="header__right_icon" onClick={handleAddSchoolClick} /></Tooltip>
-                <Tooltip title = "Dashboard"><Assessment className="header__right_icon"/></Tooltip>
+                <Tooltip title="Create/Join Class"><AddIcon className="header__right_icon" onClick={handleAddSchoolClick} /></Tooltip>
+                <Tooltip title="Dashboard"><Assessment className="header__right_icon" /></Tooltip>
                 {
-                    user?
-                    (
-                        <Avatar className={`header__right_avatar ${color} pointer`} onClick = {handleClick}>
-                            {user.displayName.split(' ')[0][0]+ user?.displayName.split(' ')[1][0]}
-                        </Avatar>
-                   ):
-                    (<Link className = "header__link" to = "/login">
-                        <Avatar className={`header__right_avatar`} ></Avatar>
-                    </Link>)
-                }           
+                    user ?
+                        (
+                            <Avatar className={`header__right_avatar ${color} pointer`} onClick={handleClick}>
+                                {user.displayName.split(' ')[0][0] + user?.displayName.split(' ')[1][0]}
+                            </Avatar>
+                        ) :
+                        (<Link className="header__link" to="/login">
+                            <Avatar className={`header__right_avatar`} ></Avatar>
+                        </Link>)
+                }
             </div>
             <Menu
-                className = "addMenu"
+                className="addMenu"
                 id="fade-menu"
                 anchorEl={addSchoolMenu}
                 keepMounted
                 open={Boolean(addSchoolMenu)}
                 onClose={handleAddSchoolClose}
             >
-                <MenuItem  onClick={() => {handleAddSchoolClose(); setOpenCreate(true) }}>Create</MenuItem>
-                <MenuItem onClick={() => {handleAddSchoolClose(); setOpenJoin(true) }}>Join</MenuItem>
+                <MenuItem onClick={() => { handleAddSchoolClose(); setOpenCreate(true) }}>Create</MenuItem>
+                <MenuItem onClick={() => { handleAddSchoolClose(); setOpenJoin(true) }}>Join</MenuItem>
             </Menu>
             <Menu
-                className = "addMenu2"
+                className="addMenu2"
                 id="fade-menu"
                 anchorEl={profileNav}
                 keepMounted
                 open={Boolean(profileNav)}
                 onClose={handleClose}
             >
-                <Link to = "/profile"  className = "header__link"><MenuItem onClick={handleClose}>Profile</MenuItem></Link>
-                <Link to = "/labs"  className = "header__link"><MenuItem onClick={handleClose}>Labs</MenuItem></Link>
-                <Link to = "/"  className = "header__link"><MenuItem onClick={logout}>Logout</MenuItem></Link>
+                <Link to="/profile" className="header__link"><MenuItem onClick={handleClose}>Profile</MenuItem></Link>
+                <Link to="/labs" className="header__link"><MenuItem onClick={handleClose}>Labs</MenuItem></Link>
+                <Link to="/" className="header__link"><MenuItem onClick={logout}>Logout</MenuItem></Link>
             </Menu>
             <Modal className="modal"
                 open={OpenCreate}
@@ -203,7 +196,7 @@ const joinClass = (e) => {
                         <Input placeholder="Acadamic Year" type="text" onChange={(e) => setAcadamicYear(e.target.value)} />
 
 
-                        <Button  variant="contained" color="secondary" type="submit"  className="createButton" onClick = {createClass}>Create</Button>
+                        <Button variant="contained" color="secondary" type="submit" className="createButton" onClick={createClass}>Create</Button>
 
                     </form>
                 </div>
@@ -215,9 +208,9 @@ const joinClass = (e) => {
             >
                 <div style={modalStyle} className={classes.paper}>
                     <form className="joinClass">
-                        
-                        <Input placeholder="Enter Class Code (Required)" type="text" onChange={(e) => setJoinClassCode(e.target.value)}  required />
-                        <Button  variant="contained" color="secondary" type="submit" className="joinButton" onClick = {joinClass}>Create</Button>
+
+                        <Input placeholder="Enter Class Code (Required)" type="text" onChange={(e) => setJoinClassCode(e.target.value)} required />
+                        <Button variant="contained" color="secondary" type="submit" className="joinButton" onClick={joinClass}>Join</Button>
                     </form>
                 </div>
             </Modal>

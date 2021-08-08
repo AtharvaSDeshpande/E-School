@@ -13,10 +13,6 @@ function LandingPage() {
     // var classIDs = [];
     // const [classes,setClasses] = useState();
     var a = true;
-    const  getClasses = () => {
-       
-    // console.log(classIDs) 
-    }
     useEffect(()=>{
         dispatch({
             action: actionTypes.SET_CLASS,

@@ -3,7 +3,6 @@ import './CreateAccount.css'
 import '../InputBlock.css'
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import VisibilityOffIcon from '@material-ui/icons/VisibilityOff';
-import { v4 as uuidv4 } from 'uuid';
 import logo from "../../assets/images/logo.png"
 import { Link, useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';

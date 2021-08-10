@@ -40,6 +40,8 @@ function CreateAccount() {
 		
 		await db.collection("users").doc(values.email.toString()).set({
 			"email": values.email,
+			"displayName": values.firstname + " " + values.lastname,
+			"photoURL": color,
 			
 		}).then(() => {
 			console.log("Document successfully written!");

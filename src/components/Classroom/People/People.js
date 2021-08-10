@@ -6,6 +6,7 @@ import { useStateValue } from '../../../StateProvider'
 import LandingPage from '../../LandingPage/LandingPage';
 import Login from '../../Login/Login';
 import'./People.css'
+import User from './User/User';
 function People() {
     const [{user,selectedClass},dispatch] = useStateValue();
     const [teachers,setTeachers] = useState([]);
@@ -60,22 +61,22 @@ function People() {
                    <div className = "people__teachers">
                         <div className = "people__title">
                             <h1 className = "people__title__header">Teachers</h1>
-                            <PersonAddOutlined className = "people__title__icon"/>
+                            {selectedClass.isTeacher?(<PersonAddOutlined className = "people__title__icon"/>):null}
                         </div>
                         <div>
                             {teachers.map(teacher => 
-                                (<p> {teacher.data.email} </p>)
+                                (<User isTeacher = {true} displayName = {teacher.data.displayName} photoURL = {teacher.data.photoURL}/>)
                         )}    
                         </div>
                    </div>
                    <div className = "people__teachers">
                         <div className = "people__title">
-                            <h1 className = "people__title__header">Students</h1>
-                            <PersonAddOutlined className = "people__title__icon"/>
+                            <h1 className = "people__title__header">Classmates</h1>
+                            {selectedClass.isTeacher?(<PersonAddOutlined className = "people__title__icon"/>):null}
                         </div>
                         <div>
                             {students.map(student => 
-                                (<p> {student.data.email} </p>)
+                                  (<User isTeacher = {false} displayName = {student.data.displayName} photoURL = {student.data.photoURL}/>)
                         )}    
                         </div>
                    </div>

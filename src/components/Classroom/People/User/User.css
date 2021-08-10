@@ -1,0 +1,28 @@
+.user{
+    width: 100%;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+.user:nth-last-child(1){
+    border: none;
+}
+.user__input{
+    flex: 5%;
+}
+.user__left{
+    flex: 5%;
+}
+
+.user__avatar{
+    
+    text-transform: uppercase;
+    margin: 10px;
+    text-align: center !important;
+}
+.user__name{
+    margin-left: 10px;
+    flex: 90%;
+    font-weight: 500;
+}

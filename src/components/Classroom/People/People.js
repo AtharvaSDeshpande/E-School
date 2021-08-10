@@ -65,7 +65,7 @@ function People() {
                         </div>
                         <div>
                             {teachers.map(teacher => 
-                                (<User isTeacher = {true} displayName = {teacher.data.displayName} photoURL = {teacher.data.photoURL}/>)
+                                (<User isTeacher = {selectedClass.isTeacher} displayName = {teacher.data.displayName} photoURL = {teacher.data.photoURL} isTeacherArea = {true}/>)
                         )}    
                         </div>
                    </div>
@@ -76,7 +76,7 @@ function People() {
                         </div>
                         <div>
                             {students.map(student => 
-                                  (<User isTeacher = {false} displayName = {student.data.displayName} photoURL = {student.data.photoURL}/>)
+                                  (<User isTeacher = {selectedClass.isTeacher} displayName = {student.data.displayName} photoURL = {student.data.photoURL} isTeacherArea = {false}/>)
                         )}    
                         </div>
                    </div>

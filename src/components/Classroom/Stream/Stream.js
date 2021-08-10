@@ -24,9 +24,7 @@ function Stream() {
                                 <p className = "stream__main__left__work">No work due soon</p>
                                 <p className = "stream__main__left__link">View all</p>
                             </div>
-                            <div className = "stream__main__right">
-                                Right                                
-                            </div>
+                            <div className = "stream__main__right">Right</div>
                     </div>
                  </div>
              ):(

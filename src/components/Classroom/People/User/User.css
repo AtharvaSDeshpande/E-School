@@ -3,13 +3,18 @@
     border-bottom: 1px solid lightgray;
     display: flex;
     align-items: center;
+    margin-top: 10px;
     /* justify-content: space-between; */
+}
+.pointer:hover{
+    background-color: #E8F0FE;
 }
 .user:nth-last-child(1){
     border: none;
 }
 .user__input{
     flex: 5%;
+   padding: 5px;
 }
 .user__left{
     flex: 5%;
@@ -25,4 +30,19 @@
     margin-left: 10px;
     flex: 90%;
     font-weight: 500;
+}
+.user__moreVert{
+    flex: 3%;
+    margin: 10px;
+    padding: 2px;
+    color: #5F6368;
+   
+}
+.user__moreVert:hover{
+    background-color: #E0E8F5;
+    border-radius: 100%;
+    color: black;
+}
+.pointer{
+    cursor: pointer;
 }

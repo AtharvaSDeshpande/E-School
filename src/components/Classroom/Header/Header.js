@@ -1,7 +1,7 @@
 import React from 'react'
 import { Avatar, Tooltip } from '@material-ui/core';
 import './Header.css'
-import logo from "../../../assets/images/logo.png"
+import logo from "../../../assets/images/logo_small.png"
 import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -39,7 +39,10 @@ function Header() {
             <div className="cheader__1">
                 <div className="cheader__left">
                     <MenuIcon className="cheader__left_icon" />
-                    <Link to="/"><img className="cheader__left_img" src={logo} alt="Logo" /></Link>
+                    <Link className = "cheader__left_link" to="/">
+                        <img className="cheader__left_img" src={logo} alt="Logo" />
+                        <p className = "cheader__left_name">{selectedClass.data.name}</p>
+                    </Link>
                 </div>
                 <div className="cheader__middle">
                     <NavLink exact to="/class/" className="streamLink" activeClassName="streamLink_active">Stream</NavLink>

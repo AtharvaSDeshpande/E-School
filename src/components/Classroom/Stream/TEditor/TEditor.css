@@ -1,0 +1,25 @@
+.ckeditor{
+    min-height: 500px;
+    background-color: blue !important;
+}
+.button__container{
+    display: flex;
+    justify-content: flex-end;
+}
+.announcementButton{
+    background: #F50057;
+    cursor: pointer;
+     border-radius: 4px;
+     opacity: 1;
+     border: 0;
+     width: 248px;
+     height: 44px;
+     color: #FFFFFF;
+     text-align: center;
+     letter-spacing: 1.6px;
+     font-size: 16px;
+     text-transform: uppercase;
+     opacity: 1;
+     margin-top: 10px;
+     align-self: flex-end;
+}

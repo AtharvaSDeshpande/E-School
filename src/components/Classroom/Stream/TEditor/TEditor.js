@@ -7,6 +7,7 @@ import { useStateValue } from '../../../../StateProvider';
 import Login from '../../../Login/Login';
 import LandingPage from '../../../LandingPage/LandingPage';
 import { useState } from 'react';
+import db, { time } from '../../../../firebase';
 
 const config = {
     toolbar: {
@@ -14,30 +15,22 @@ const config = {
         shouldNotGroupWhenFull: true
     }
 };
-// const editorConfiguration = {
-//     plugins: [ Essentials, Bold, Italic, Paragraph ],
-//     toolbar: [ 'bold', 'italic' ]
-// toolbarGroups = [
-// 	{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
-// 	{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-// 	{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ] },
-// 	{ name: 'forms' },
-// 	'/',
-// 	{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-// 	{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-// 	{ name: 'links' },
-// 	{ name: 'insert' },
-// 	'/',
-// 	{ name: 'styles' },
-// 	{ name: 'colors' },
-// 	{ name: 'tools' },
-// 	{ name: 'others' },
-// 	{ name: 'about' }
-// ];
-// };
+
 function TEditor() {
-    const  [{ user, selectedClass }, dispatch] = useStateValue();
-    const [message,setMessage] = useState();
+    const [{ user, selectedClass }, dispatch] = useStateValue();
+    const [message,setMessage] = useState(null);
+    const post = () => {
+        if (message != null && message!="")
+        db.collection("classes").doc(selectedClass.id).collection("stream").add({
+            "message": message,
+            "displayName": user.displayName,
+            "color": user.photoURL,
+            "email": user.email,
+            "timeStamp": time
+        }).then(()=>{
+            setMessage(null)
+        })
+    }
         return (
             <div className="App">
                 {user != null && selectedClass != null ? (
@@ -68,11 +61,11 @@ function TEditor() {
                         }}
                     />
                     <div className = "button__container">
-                        <button className  = "button" className = "announcementButton">POST</button>
+                        <button className  = "button" className = "announcementButton" onClick = {post}>POST</button>
                     </div>
-                    <div dangerouslySetInnerHTML = {{__html: message}}>
-                        {/* {message} */}
-                    </div>
+                    {/* <div dangerouslySetInnerHTML = {{__html: message}}>
+                   
+                    </div> */}
                     </div>) : (
                     <div>
                         {user == null ? (

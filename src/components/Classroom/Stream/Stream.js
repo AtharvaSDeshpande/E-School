@@ -1,17 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStateValue } from '../../../StateProvider'
 import LandingPage from '../../LandingPage/LandingPage';
 import Login from '../../Login/Login';
 import './Stream.css'
 import TEditor from './TEditor/TEditor';
 import { Close } from '@material-ui/icons';
+import Message from './Message/Message';
+import db from '../../../firebase';
 
 function Stream() {
 
 
-    
-
-    const [{ user, selectedClass }, dispatch] = useStateValue();
+     const [{ user, selectedClass }, dispatch] = useStateValue();
+    const [messages,setMessages] = useState([]);
+    useEffect(()=>{
+        db.collection("classes").doc(selectedClass?.id).collection("stream").orderBy('timeStamp','desc').onSnapshot((snapshot)=>{
+            setMessages(
+                snapshot.docs.map((doc) => ({
+                    id: doc.id,
+                    data: doc.data(),
+                }))
+            )
+        })
+    },[selectedClass?.id])
+   
 
     const [makeAnnouncement, setMakeAnnouncement] = useState(false);
     return (
@@ -46,7 +58,10 @@ function Stream() {
                                 Announce something to your class
                             </div>
                             )}
-                            
+                            {messages.map(message => (
+                                 <Message email = {message.data.email} message = {message.data.message} photoURL= {message.data.color} displayName = {message.data.displayName} timestamp = {message.data.timeStamp} id = {message.id} />
+                            ))}
+                           
                             
                             
                         </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Avatar, Button, Input, makeStyles, Modal, Tooltip } from '@material-ui/core';
 import './Header.css'
 import logo from "../../assets/images/logo.png"
+import logo_small from "../../assets/images/logo_small.png"
 import MenuIcon from '@material-ui/icons/Menu';
 import AddIcon from '@material-ui/icons/Add';
 import Menu from '@material-ui/core/Menu';
@@ -144,6 +145,7 @@ function Header() {
             <div className="header__left">
                 <MenuIcon className="header__left_icon" />
                 <Link to="/"><img className="header__left_img" src={logo} alt="Logo" /></Link>
+                <Link to="/"><img className="header__left_img_small" src={logo_small} alt="Logo" /></Link>
             </div>
             <div className="header__right">
                 <Tooltip title="Create/Join Class"><AddIcon className="header__right_icon" onClick={handleAddSchoolClick} /></Tooltip>

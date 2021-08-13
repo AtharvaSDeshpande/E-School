@@ -84,8 +84,25 @@
     cursor: pointer;
 }
 
+.header__left_img_small{
+    display: none;
+
+}
+@media (max-width: 400px) {
+    .header__left_img {
+       
+        display: none;
+    }
+    .header__left_img_small{
+        display: block;
+        margin: 10px;
+        object-fit: contain;
+        height: 30px;
+
+    }
 
 
+}
 
 
 

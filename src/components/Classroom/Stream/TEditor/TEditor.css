@@ -1,5 +1,6 @@
 .ckeditor{
     min-height: 500px;
+    width: 300x !important;
     background-color: blue !important;
 }
 .button__container{
@@ -9,10 +10,12 @@
 .announcementButton{
     background: #F50057;
     cursor: pointer;
-     border-radius: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 4px;
      opacity: 1;
      border: 0;
-     width: 248px;
+     width: auto;
      height: 44px;
      color: #FFFFFF;
      text-align: center;

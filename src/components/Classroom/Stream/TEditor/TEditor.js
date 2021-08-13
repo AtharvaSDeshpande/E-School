@@ -8,6 +8,33 @@ import Login from '../../../Login/Login';
 import LandingPage from '../../../LandingPage/LandingPage';
 import { useState } from 'react';
 
+const config = {
+    toolbar: {
+        // items: [ 'bold', 'italic', '|', 'undo', 'redo','|',  'numberedList', 'bulletedList','|','link','insertTable','blockQuote' ],
+        shouldNotGroupWhenFull: true
+    }
+};
+// const editorConfiguration = {
+//     plugins: [ Essentials, Bold, Italic, Paragraph ],
+//     toolbar: [ 'bold', 'italic' ]
+// toolbarGroups = [
+// 	{ name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+// 	{ name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+// 	{ name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ] },
+// 	{ name: 'forms' },
+// 	'/',
+// 	{ name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+// 	{ name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+// 	{ name: 'links' },
+// 	{ name: 'insert' },
+// 	'/',
+// 	{ name: 'styles' },
+// 	{ name: 'colors' },
+// 	{ name: 'tools' },
+// 	{ name: 'others' },
+// 	{ name: 'about' }
+// ];
+// };
 function TEditor() {
     const  [{ user, selectedClass }, dispatch] = useStateValue();
     const [message,setMessage] = useState();
@@ -16,7 +43,9 @@ function TEditor() {
                 {user != null && selectedClass != null ? (
                     <div><CKEditor
                         className="ckeditor"
+                        
                         editor={ClassicEditor}
+                        config = {config}
                         data=""
                         onReady={editor => {
                             // // You can store the "editor" and use when it is needed.

@@ -20,13 +20,15 @@ function TEditor() {
     const [{ user, selectedClass }, dispatch] = useStateValue();
     const [message,setMessage] = useState(null);
     const post = () => {
-        if (message != null)
+        if (message != null && message!="")
         db.collection("classes").doc(selectedClass.id).collection("stream").add({
             "message": message,
             "displayName": user.displayName,
             "color": user.photoURL,
             "email": user.email,
             "timeStamp": time
+        }).then(()=>{
+            setMessage(null)
         })
     }
         return (

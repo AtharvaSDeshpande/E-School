@@ -8,55 +8,55 @@ import db from '../../firebase';
 import { actionTypes } from '../../reducer';
 
 function LandingPage() {
-    const [{user,selectedClass},dispatch] = useStateValue();
-    const [classIDs,setClassIDs] = useState([]);
+    const [{ user, selectedClass }, dispatch] = useStateValue();
+    const [classIDs, setClassIDs] = useState([]);
     // var classIDs = [];
     // const [classes,setClasses] = useState();
     var a = true;
-    useEffect(()=>{
+    useEffect(() => {
         dispatch({
             action: actionTypes.SET_CLASS,
             selectedClass: null
         })
-    },[dispatch])
-    useEffect(()=>{
+    }, [dispatch])
+    useEffect(() => {
         // setClassIDs([])
-        
-                    setClassIDs([]);
-        db.collection("users").doc(user?.email).collection("classes").onSnapshot((snapshot)=>{
+
+        setClassIDs([]);
+        db.collection("users").doc(user?.email).collection("classes").onSnapshot((snapshot) => {
             // setClassIDs(
-               
-                    setClassIDs([]);
-                snapshot.docs.map((doc) =>{ 
-                    
-                    db.collection("classes").doc(doc.id).get().then((result) => {
-                        
-                        setClassIDs ( classID => [...classID, {
-                            id: result.id,
-                            data: result.data(),
-                            isTeacher: doc.data().isTeacher,
-                            }]
-                        )
-                    })
+
+            setClassIDs([]);
+            snapshot.docs.map((doc) => {
+
+                db.collection("classes").doc(doc.id).get().then((result) => {
+
+                    setClassIDs(classID => [...classID, {
+                        id: result.id,
+                        data: result.data(),
+                        isTeacher: doc.data().isTeacher,
+                    }]
+                    )
                 })
-       })   
-   },[user?.email])
-//    
-    
+            })
+        })
+    }, [user?.email])
+    //    
+
     return (
-        <div className = "landingPage">
-            
-            {user?(<div>
-                <Header/>
-                <div className= "blocks">
-                   
-                  {
-                  classIDs.map(classID => 
-                (<Block id = {classID.id} myClassName = {classID?.data.name} semester = {classID?.data?.semester} acadamicYear = {classID?.data?.acadamicYear}  displayName = {classID?.data?.displayName} isTeacher = {classID?.isTeacher} active = {a} myClass = {classID}/>)
-                  )}
+        <div className="landingPage">
+
+            {user ? (<div>
+                <Header />
+                <div className="blocks">
+
+                    {
+                        classIDs.map(classID =>
+                            (<Block myClass={classID} />)
+                        )}
                 </div>
-            </div>):(<div>
-                <Login/>
+            </div>) : (<div>
+                <Login />
             </div>)}
         </div>
     )

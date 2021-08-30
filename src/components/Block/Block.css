@@ -10,7 +10,7 @@
 }
 
 .block__title{
-    flex: 30%;
+    height: 90px;
     background-color: #3367D5;
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -49,21 +49,38 @@
 }
 
 .block__todo{
-    flex: 60%;
+    height: 180px;
     border-bottom: 1px solid lightgray;
 }
 
 .block__nav{
     display: flex;
     justify-content: space-evenly;
-    align-items: baseline;
-    flex: 10%;
+    align-items: baseline !important;
+   height: 30px;
+}
+
+.disabled {
+
+    cursor: not-allowed;
 }
 
 .block__nav__icon{
+  
     color: #5F6368;
     cursor: pointer;
     align-self: center;
+
+}
+.block__nav__link
+{
+    
+    height: 30px;
+   display: flex;
+    align-items: baseline !important;
+    text-decoration: none !important;
+    
+
 }
 
 .danger:hover{

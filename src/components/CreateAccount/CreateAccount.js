@@ -133,7 +133,7 @@ function CreateAccount() {
 				{/* Name */}
 				<div className="inputBlock">
 					<p className="inputBlock__label"><b>First Name</b></p>
-					<input className="inputBlock__input" type="text" id="firstname" required
+					<input className="inputBlock__input inputBlock__border" type="text" id="firstname" required
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 						value={formik.values.firstname}
@@ -142,7 +142,7 @@ function CreateAccount() {
 				</div>
 				<div className="inputBlock">
 					<p className="inputBlock__label"><b>Last Name</b></p>
-					<input className="inputBlock__input" type="text" id="lastname"
+					<input className="inputBlock__input inputBlock__border" type="text" id="lastname"
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 						value={formik.values.lastname}
@@ -152,7 +152,7 @@ function CreateAccount() {
 				{/* Email */}
 				<div className="inputBlock">
 					<p className="inputBlock__label"><b>Email</b></p>
-					<input id="email" className="inputBlock__input" type="email" required
+					<input id="email" className="inputBlock__input inputBlock__border" type="email" required
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 						value={formik.values.email}
@@ -162,7 +162,7 @@ function CreateAccount() {
 				{/* Mobile */}
 				<div className="inputBlock">
 					<p className="inputBlock__label"><b>Mobile</b></p>
-					<input id="mobile" className="inputBlock__input" type = "tel" required
+					<input id="mobile" className="inputBlock__input inputBlock__border" type = "tel" required
 						onChange={formik.handleChange}
 						onBlur={formik.handleBlur}
 						value={formik.values.mobile}

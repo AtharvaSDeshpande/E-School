@@ -20,8 +20,12 @@
     width: 398px;
     height: 34px;
     border: none;
-    border-bottom: 1px solid black !important;
+    
 
+}
+.inputBlock__border
+{
+    border-bottom: 1px solid black !important;
 }
 input:focus
 {
@@ -30,6 +34,7 @@ input:focus
 .passwordInputBox {
     display: flex;
     align-items: center !important;
+    border-bottom: 1px solid black !important;
 }
 .inputBlock__password {
     width: 384px;
@@ -45,7 +50,7 @@ input:focus
     width : 14px;
     height: 34px;
     object-fit: contain;
-    border-bottom: 1px solid black !important;
+    /* border-bottom: 1px solid black !important; */
     background: #F6F8F9 0% 0% no-repeat padding-box;
 
     /* align-self: baseline !important; */
@@ -67,7 +72,7 @@ input:focus
     align-self: center !important;
 }
 .inputBlock__input {
-    width: 280px;
+    width: 280px;;
 }
 }
 .hidden{

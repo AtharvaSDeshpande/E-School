@@ -100,7 +100,7 @@ function Login() {
                     {/* Email */}
                     <div className="inputBlock">
                         <p className="inputBlock__label"><b>Email</b></p>
-                        <input id="email" className="inputBlock__input" type="email"   required
+                        <input id="email" className="inputBlock__input inputBlock__border" type="email"   required
                             onChange={formik.handleChange}
                             onBlur={formik.handleBlur}
                             value={formik.values.email}

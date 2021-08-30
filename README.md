@@ -21,6 +21,5 @@ npm start
 ```
 
 ### 5. The website is deployed on
-```
+
 https://smart-classroom-fc67a.web.app/
-```

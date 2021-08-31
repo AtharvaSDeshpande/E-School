@@ -52,9 +52,9 @@ function Block({ myClass }) {
                         null
                 ) : null}
                  
-                       
-                <Tooltip title = "Ask Doubt" className = "block__nav__icon"><Forum/></Tooltip>
-               {!isTeacher?(<Link to = "class/dashboard" className = "block__nav__link" onClick={setClass}><Tooltip title="Dashboard"><Dashboard className="block__nav__icon" /></Tooltip></Link>):(<Link className = "block__nav__link" onClick={setClass}><Tooltip title="Evaluate"><CheckCircle className="block__nav__icon" /></Tooltip></Link>)}
+                {!isTeacher?(<Tooltip title = "Ask Doubt" className = "block__nav__icon"><Forum/></Tooltip>):null}            
+               
+               {!isTeacher?(<Link to = "/class/dashboard" className = "block__nav__link" onClick={setClass}><Tooltip title="Dashboard"><Dashboard className="block__nav__icon" /></Tooltip></Link>):(<Link className = "block__nav__link" onClick={setClass}><Tooltip title="Evaluate"><CheckCircle className="block__nav__icon" /></Tooltip></Link>)}
                 
                 <Link to="/class" className="block__nav__link" onClick={setClass}><Tooltip title="Enter Classroom"><LaunchIcon className="block__nav__icon"/></Tooltip></Link>
             </div>

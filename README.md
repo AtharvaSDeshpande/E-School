@@ -20,6 +20,13 @@ npm install
 npm start
 ```
 
-### 5. The website is deployed on
+### 5. The partially developed website is deployed on
 
 https://smart-classroom-fc67a.web.app/
+```
+
+Following are the demo login credentials:
+  Email: collegedata4@gmail.com
+  Password: 12345678
+
+```

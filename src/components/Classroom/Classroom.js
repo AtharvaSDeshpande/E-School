@@ -7,6 +7,7 @@ import Header from './Header/Header';
 import { Route } from 'react-router';
 import Stream from './Stream/Stream';
 import People from './People/People';
+import Dashboard from '../Dashboard/Dashboard';
 
 
 function Classroom() {
@@ -22,6 +23,9 @@ function Classroom() {
 					</Route>
                     <Route path="/class/classwork">
 						Classwork
+					</Route>
+                    <Route path="/class/dashboard">
+						<Dashboard/>
 					</Route>
                     <Route path="/class/people">
 						<People/>

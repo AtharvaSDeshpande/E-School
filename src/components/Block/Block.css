@@ -90,3 +90,52 @@
 .active {
     color: rgb(6, 231, 6);
 }
+
+.doubt{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.doubt__title{
+    text-align: center;
+    font-weight: 500;
+    width: 100%;
+    border-bottom: 1px solid black;
+
+}
+.doubt__textarea{
+    margin: 10px; 
+    border: 1px solid gray;
+    min-height: 100px;
+    width: 90%;
+    
+    resize: none;
+}
+
+.doubt__button{
+    background: #F50057;
+    cursor: pointer;
+     border-radius: 4px;
+     opacity: 1;
+     border: 0;
+     /* width: 200px; */
+     height: 44px;
+     color: #FFFFFF;
+     text-align: center;
+     letter-spacing: 1.6px;
+     font-size: 16px;
+     text-transform: uppercase;
+     opacity: 1;
+    padding: 5px;
+     margin-bottom: 5px;
+}
+
+
+.block__doubtModal__top{
+    display: flex;
+    justify-content: flex-end;
+    padding: 5px;
+    
+}

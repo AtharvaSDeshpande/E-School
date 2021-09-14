@@ -1,11 +1,11 @@
 import { AddCircle, Group, Home, LocalDrink, Mail } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react'
-import { actionTypes } from '../../reducer';
-import { useStateValue } from '../../StateProvider';
-import LandingPage from '../LandingPage/LandingPage'
-import Login from '../Login/Login'
-
+import { actionTypes } from '../../../reducer';
+import { useStateValue } from '../../../StateProvider';
+import LandingPage from '../../LandingPage/LandingPage';
+import Login from '../../Login/Login';
 import './Dashboard.css'
+import Doubts from './Doubts/Doubts';
 
 function Dashboard() {
     const [{ user, selectedClass, dashboard }, dispatch] = useStateValue();
@@ -70,7 +70,7 @@ function Dashboard() {
                     <div className="dashboard__right">
                         {(dashboard=="Home")?(
                             <h1>Home</h1>
-                        ):(dashboard == "Grades")?(<h1>Grade</h1>):(dashboard == "Doubts")?(<h1>Doubts</h1>):(<h1>Last</h1>)
+                        ):(dashboard == "Grades")?(<h1>Grade</h1>):(dashboard == "Doubts")?(<Doubts/>):(<h1>Last</h1>)
                                                    
                         }
                     </div>
@@ -78,7 +78,7 @@ function Dashboard() {
             ) : (
                 <div>
                     {user == null ? (
-                        <Login />
+                        <Login/>
                     ) : (
                         <LandingPage />
                     )}

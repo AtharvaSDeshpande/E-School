@@ -7,7 +7,9 @@ import Header from './Header/Header';
 import { Route } from 'react-router';
 import Stream from './Stream/Stream';
 import People from './People/People';
-import Dashboard from '../Dashboard/Dashboard';
+import Dashboard from './Dashboard/Dashboard';
+import DoubtPage from './DoubtPage/DoubtPage';
+
 
 
 function Classroom() {
@@ -31,7 +33,7 @@ function Classroom() {
 						<People/>
 					</Route>
                     <Route path="/class/doubts">
-						Doubts
+						<DoubtPage/>
 					</Route>
                     <Route path="/class/evaluate">
 						Grades

@@ -7,7 +7,17 @@
     display: flex;
     justify-content: flex-end;
 }
-.announcementButton{
+.doubt__block__answer{
+    width: 100%;
+    border-top: 1px solid rgb(78, 76, 76);
+    padding: 5px;
+    height: fit-content;
+    /* color: green; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.doubt__block__announcementButton{
     background: #F50057;
     cursor: pointer;
     padding-left: 20px;

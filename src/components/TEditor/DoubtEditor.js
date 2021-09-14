@@ -24,13 +24,14 @@ function DoubtEditor() {
     const [{ user, selectedClass }, dispatch] = useStateValue();
     const [message,setMessage] = useState(null);
     const post = () => {
-        
+      
         if (message != null && message!="")
         db.collection("classes").doc(selectedClass.id).collection("doubts").add({
-            "message": message,
+            "question": message,
             "displayName": user.displayName,
             "color": user.photoURL,
             "email": user.email,
+            "status":false,
             "timeStamp": time
         }).then(()=>{
             dispatch({
@@ -69,8 +70,14 @@ function DoubtEditor() {
                         }}
                     />
                     <div className = "button__container">
-                        <button className  = "button" className = "announcementButton" onClick = {post}>ASK DOUBT</button>
-                    </div>
+                        {selectedClass?.isTeacher?(
+                            <div className = "doubt__block__answer">
+                                <button className="doubt__block__announcementButton">Reply</button>
+                                <button className="doubt__block__announcementButton">Stream in Classroom</button>
+                            </div>
+                        ):(<button className  = "button" className = "doubt__block__announcementButton" onClick = {post}>ASK DOUBT</button>
+                   )}
+                         </div>
                     {/* <div dangerouslySetInnerHTML = {{__html: message}}>
                    
                     </div> */}

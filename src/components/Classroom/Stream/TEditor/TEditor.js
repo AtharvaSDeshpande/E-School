@@ -8,11 +8,15 @@ import Login from '../../../Login/Login';
 import LandingPage from '../../../LandingPage/LandingPage';
 import { useState } from 'react';
 import db, { time } from '../../../../firebase';
+import { actionTypes } from '../../../../reducer';
 
 const config = {
     toolbar: {
         // items: [ 'bold', 'italic', '|', 'undo', 'redo','|',  'numberedList', 'bulletedList','|','link','insertTable','blockQuote' ],
         shouldNotGroupWhenFull: true
+    },
+    link: {
+        target: "_blank",
     }
 };
 
@@ -29,6 +33,10 @@ function TEditor() {
             "timeStamp": time
         }).then(()=>{
             setMessage(null)
+            dispatch({
+                type: actionTypes.SET_ANNOUNCEMENT,
+                makeAnnouncement: false,
+            })
         })
     }
         return (

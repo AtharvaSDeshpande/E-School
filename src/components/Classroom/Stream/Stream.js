@@ -7,14 +7,15 @@ import TEditor from './TEditor/TEditor';
 import { Close } from '@material-ui/icons';
 import Message from './Message/Message';
 import db from '../../../firebase';
+import { actionTypes } from '../../../reducer';
 
 function Stream() {
 
 
-     const [{ user, selectedClass }, dispatch] = useStateValue();
-    const [messages,setMessages] = useState([]);
-    useEffect(()=>{
-        db.collection("classes").doc(selectedClass?.id).collection("stream").orderBy('timeStamp','desc').onSnapshot((snapshot)=>{
+    const [{ user, selectedClass, makeAnnouncement }, dispatch] = useStateValue();
+    const [messages, setMessages] = useState([]);
+    useEffect(() => {
+        db.collection("classes").doc(selectedClass?.id).collection("stream").orderBy('timeStamp', 'desc').onSnapshot((snapshot) => {
             setMessages(
                 snapshot.docs.map((doc) => ({
                     id: doc.id,
@@ -22,10 +23,10 @@ function Stream() {
                 }))
             )
         })
-    },[selectedClass?.id])
-   
+    }, [selectedClass?.id])
 
-    const [makeAnnouncement, setMakeAnnouncement] = useState(false);
+
+
     return (
         <div>
             {user != null && selectedClass != null ? (
@@ -46,24 +47,34 @@ function Stream() {
                             <p className="stream__main__left__link">View all</p>
                         </div>
                         <div className="stream__main__right">
-                            {makeAnnouncement?(
-                                <div className = "announcement">
-                                    <div className = "announcementClose"><Close className = "announcementCloseIcon" onClick = {()=>{setMakeAnnouncement(false)}}/></div>
-                                    
-                                    <TEditor/>
-                                    
+                            {makeAnnouncement ? (
+                                <div className="announcement">
+                                    <div className="announcementClose"><Close className="announcementCloseIcon" onClick={() => {
+                                        dispatch({
+                                            type: actionTypes.SET_ANNOUNCEMENT,
+                                            makeAnnouncement: false,
+                                        })
+                                    }} /></div>
+
+                                    <TEditor />
+
                                 </div>
-                            ):(
-                                <div className="stream__main__right__announcement" onClick = {() => {setMakeAnnouncement(true)}}>
-                                Announce something to your class
-                            </div>
+                            ) : (
+                                <div className="stream__main__right__announcement" onClick={() => {
+                                    dispatch({
+                                        type: actionTypes.SET_ANNOUNCEMENT,
+                                        makeAnnouncement: true,
+                                    })
+                                }}>
+                                    Announce something to your class
+                                </div>
                             )}
                             {messages.map(message => (
-                                 <Message email = {message.data.email} message = {message.data.message} photoURL= {message.data.color} displayName = {message.data.displayName} timestamp = {message.data.timeStamp} id = {message.id} />
+                                <Message email={message.data.email} message={message.data.message} photoURL={message.data.color} displayName={message.data.displayName} timestamp={message.data.timeStamp} id={message.id} />
                             ))}
-                           
-                            
-                            
+
+
+
                         </div>
                     </div>
                 </div>
@@ -77,9 +88,9 @@ function Stream() {
                 </div>
             )
             }
-           
-                    
-               
+
+
+
         </div>
     )
 }

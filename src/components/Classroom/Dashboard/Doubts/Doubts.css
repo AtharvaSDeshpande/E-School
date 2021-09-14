@@ -24,6 +24,7 @@
 }
 
 .doubt__block{
+    margin: 10px;
     width: 50vw;
     display: flex;
     flex-direction: column;

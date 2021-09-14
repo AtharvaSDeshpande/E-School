@@ -4,6 +4,7 @@ import { actionTypes } from '../../../reducer';
 import { useStateValue } from '../../../StateProvider';
 import LandingPage from '../../LandingPage/LandingPage';
 import Login from '../../Login/Login';
+import Stream from '../Stream/Stream';
 import './Dashboard.css'
 import Doubts from './Doubts/Doubts';
 
@@ -15,7 +16,7 @@ function Dashboard() {
 
         <div >
 
-            {user != null && selectedClass != null ? (
+            {user != null && selectedClass != null  && !selectedClass.isTeacher? (
 
                 <div className="dashboard">
                     <div className="dashboard__left">
@@ -80,7 +81,7 @@ function Dashboard() {
                     {user == null ? (
                         <Login/>
                     ) : (
-                        <LandingPage />
+                        <Stream />
                     )}
                 </div>
             )

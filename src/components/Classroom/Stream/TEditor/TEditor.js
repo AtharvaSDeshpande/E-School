@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './TEditor.css'
-import Header from '../../Header/Header';
 import { useStateValue } from '../../../../StateProvider';
 import Login from '../../../Login/Login';
 import LandingPage from '../../../LandingPage/LandingPage';
@@ -15,9 +14,7 @@ const config = {
         // items: [ 'bold', 'italic', '|', 'undo', 'redo','|',  'numberedList', 'bulletedList','|','link','insertTable','blockQuote' ],
         shouldNotGroupWhenFull: true
     },
-    link: {
-        target: "_blank",
-    }
+    
 };
 
 function TEditor() {

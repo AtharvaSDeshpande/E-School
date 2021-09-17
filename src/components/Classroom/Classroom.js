@@ -9,6 +9,7 @@ import Stream from './Stream/Stream';
 import People from './People/People';
 import Dashboard from './Dashboard/Dashboard';
 import DoubtPage from './DoubtPage/DoubtPage';
+import PageNotFound from '../404/PageNotFound';
 
 
 
@@ -24,7 +25,7 @@ function Classroom() {
 						<Stream/>
 					</Route>
                     <Route path="/class/classwork">
-						Classwork
+						<PageNotFound/>
 					</Route>
                     <Route path="/class/dashboard">
 						<Dashboard/>
@@ -36,7 +37,7 @@ function Classroom() {
 						<DoubtPage/>
 					</Route>
                     <Route path="/class/evaluate">
-						Grades
+                        <PageNotFound/>
 					</Route>
                  </div>
              ):(

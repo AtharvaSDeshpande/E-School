@@ -2,6 +2,7 @@ import { AddCircle, Group, Home, LocalDrink, Mail } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react'
 import { actionTypes } from '../../../reducer';
 import { useStateValue } from '../../../StateProvider';
+import PageNotFound from '../../404/PageNotFound';
 import LandingPage from '../../LandingPage/LandingPage';
 import Login from '../../Login/Login';
 import Stream from '../Stream/Stream';
@@ -70,8 +71,8 @@ function Dashboard() {
                     </div>
                     <div className="dashboard__right">
                         {(dashboard=="Home")?(
-                            <h1>Home</h1>
-                        ):(dashboard == "Grades")?(<h1>Grade</h1>):(dashboard == "Doubts")?(<Doubts/>):(<h1>Last</h1>)
+                            <PageNotFound/>
+                        ):(dashboard == "Grades")?(<PageNotFound/>):(dashboard == "Doubts")?(<Doubts/>):(<PageNotFound/>)
                                                    
                         }
                     </div>

@@ -1,9 +1,11 @@
 import React from 'react'
+import PageNotFound from '../404/PageNotFound'
+import AlertMessage from '../AlertMessage/AlertMessage'
 import './Labs.css'
 function Labs() {
     return (
         <div>
-            Welcome to labs
+           <PageNotFound/>
         </div>
     )
 }

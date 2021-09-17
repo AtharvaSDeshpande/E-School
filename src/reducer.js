@@ -1,9 +1,10 @@
 export const initialState = {
     user: null,
     selectedClass: null,
-    dashboard: "Home",
+    dashboard: "Doubts",
     doubtModal: false,
     makeAnnouncement: false,
+    alertMessage: null,
 };
 export const actionTypes = {
     SET_USER: "SET_USER",
@@ -11,6 +12,7 @@ export const actionTypes = {
     SET_DASHBOARD: "SET_DASHBOARD",
     SET_MODAL: "SET_MODAL",
     SET_ANNOUNCEMENT: "SET_ANNOUNCEMENT",
+    SET_ALERTMESSAGE: "SET_ALERTMESSAGE",
 }
 
 const reducer = (state,action) => {
@@ -43,6 +45,13 @@ const reducer = (state,action) => {
             return {
                     ...state,
                     makeAnnouncement: action.makeAnnouncement,
+            }   
+        case actionTypes.SET_ALERTMESSAGE:
+            // console.log(action.dashboard)
+            // alert(action.alertMessage)
+            return {
+                    ...state,
+                    alertMessage: action.alertMessage,
             }                    
         default:
             return state;

@@ -8,8 +8,11 @@ import { Link, useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import db, { auth } from '../../firebase';
+import { useStateValue } from '../../StateProvider';
+import { actionTypes } from '../../reducer';
 
 function CreateAccount() {
+	const [{alertMessage},dispatch] = useStateValue();
 	const [passwordHidden, setPasswordHidden] = useState(true);
 	const [passwordType, setPasswordType] = useState("password");
 	const changePasswordTypeVisible = () => {
@@ -32,7 +35,6 @@ function CreateAccount() {
 		setConfirmPasswordHidden(true);
 	}
 	
-
 
 	const colors = ["black","red","purple","blue","violet","orange","pink","green","teal","yellow"]
 	var color = colors[Math.ceil(Math.random()*(colors.length)) - 1];
@@ -91,7 +93,10 @@ function CreateAccount() {
 			auth.createUserWithEmailAndPassword(values.email, values.password).then((userCredential) => {
 				// send verification mail.
 
-
+				dispatch({
+					type: actionTypes.SET_ALERTMESSAGE,
+					alertMessage: null,
+				})
 				if (!userCredential.user.emailVerified) {
 					userCredential.user.sendEmailVerification();
 					// userCredential.user.displayName = values.firstname +" "+ values?.lastname;
@@ -101,12 +106,22 @@ function CreateAccount() {
 					})
 					
 					auth.signOut();
-					alert("Verification Email is Sent");
+					dispatch({
+						type: actionTypes.SET_ALERTMESSAGE,
+						alertMessage: "Verification Email is Sent",
+					})
+					
 
 				}
 
 			})
-				.catch(alert);
+				.catch((error)=>{
+					dispatch({
+						type: actionTypes.SET_ALERTMESSAGE,
+						alertMessage: error.message,
+					})
+					
+				});
 			db.collection("users").doc(values.email.toString()).get().then((doc) => {
 				if (!doc.exists) {
 					addDataToDB(values);

@@ -1,4 +1,4 @@
-import { AddCircle, Group, Home, LocalDrink, Mail } from '@material-ui/icons';
+import { AddCircle, DashboardOutlined, Group, Home, LocalDrink, Mail } from '@material-ui/icons';
 import React, { useEffect, useState } from 'react'
 import { actionTypes } from '../../../reducer';
 import { useStateValue } from '../../../StateProvider';
@@ -22,6 +22,7 @@ function Dashboard() {
                 <div className="dashboard">
                     <div className="dashboard__left">
                         <h1 className="dashboard__title">Dashboard</h1>
+                        <DashboardOutlined className="dashboard__titleIcon"/>
                         <hr className="dashboard__leftHR" />
                         <div className="dashboard__left__nav">
                             <div className="navButton" onClick={()=>{

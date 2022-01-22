@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { Avatar, Button, Input, makeStyles, Modal, Tooltip } from '@material-ui/core';
+import React, { Fragment, useState } from 'react'
+import clsx from 'clsx';
+import { Avatar, Button, Divider, Drawer, Input, List, ListItem, ListItemIcon, ListItemText, makeStyles, Modal, Tooltip } from '@material-ui/core';
 import './Header.css'
 import logo from "../../assets/images/logo.png"
 import logo_small from "../../assets/images/logo_small.png"
@@ -10,7 +11,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { Link } from 'react-router-dom';
 import { useStateValue } from '../../StateProvider';
 import { actionTypes } from '../../reducer';
-import { Assessment } from '@material-ui/icons';
+import { Assessment, Home } from '@material-ui/icons';
 import db, { auth } from '../../firebase';
 import { v4 as uuidv4 } from 'uuid';
 import crypto from 'crypto';
@@ -33,9 +34,110 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
     },
-}))
+    root: {
+        flexGrow: 1,
+        backgroundColor: theme.palette.background.paper,
+    },
+    col: {
+        color: "white"
+    },
+    list: {
+        width: 250,
+    },
+    fullList: {
+        width: 'auto',
+    },
+
+}));
 function Header() {
-    const [{ user }, dispatch] = useStateValue();
+    const classes = useStyles();
+    const setClass = (myClass) => {
+        // console.log(myClass)
+        dispatch({
+            type: actionTypes.SET_CLASS,
+            selectedClass: myClass,
+        })
+    }
+
+
+    const [{ user, selectedClass, allClasses }, dispatch] = useStateValue();
+   
+    const [state, setState] = useState({
+        top: false,
+        left: false,
+        bottom: false,
+        right: false,
+    });
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return;
+        }
+
+        setState({ ...state, [anchor]: open });
+    };
+
+    const list = (anchor) => (
+        <div
+            className={clsx(classes.list, {
+                [classes.fullList]: anchor === 'top' || anchor === 'bottom',
+            })}
+            role="presentation"
+            onClick={toggleDrawer(anchor, false)}
+            onKeyDown={toggleDrawer(anchor, false)}
+        >
+            <List>
+                <Link className="listLink" to="/">
+                    <ListItem button key="Home">
+                        <ListItemIcon><Home /></ListItemIcon>
+                        <ListItemText primary="Home" />
+                    </ListItem>
+                </Link>
+
+                {/* <Link className = "listLink" to = "/"> */}
+                <ListItem button key="Dashboard">
+                    <ListItemIcon><Assessment /></ListItemIcon>
+                    <ListItemText primary="Dashboard" />
+                </ListItem>
+                {/* </Link> */}
+
+                <Divider />
+                <ListItem>
+                    <p style={{ color: "#5F6368", fontWeight: "500", margin: "5px", }}>Teaching</p>
+                </ListItem>
+                {allClasses?.map((i) => {
+
+                    if (i?.isTeacher)
+                        return (
+                            <Link to="/class" className="listLink" onClick={() => { setClass(i) }} >
+                                <ListItem button key="Home">
+                                    <ListItemIcon><Avatar className='pink' >{i?.data.name[0]}</Avatar></ListItemIcon>
+                                    <ListItemText primary={i?.data.name} />
+                                </ListItem>
+                            </Link>)
+                    return null
+                })}
+                <Divider />
+                <ListItem>
+                    <p style={{ color: "#5F6368", fontWeight: "500", margin: "5px", }}>Enrolled</p>
+                </ListItem>
+                {allClasses?.map((i) => {
+
+                    if (!i?.isTeacher)
+                        return (
+                            <Link to="/class" className="listLink" onClick={() => { setClass(i) }} >
+                                <ListItem button key="Home">
+                                    <ListItemIcon><Avatar className='pink' >{i?.data.name[0]}</Avatar></ListItemIcon>
+                                    <ListItemText primary={i?.data.name} />
+                                </ListItem>
+                            </Link>)
+                    return null
+                })}
+
+            </List>
+
+        </div>
+    );
+    const [anchor, setAnchor] = useState("left")
 
     const color = user?.photoURL;
     const [addSchoolMenu, setAddSchoolMenu] = useState(null);
@@ -58,7 +160,7 @@ function Header() {
 
     const [OpenCreate, setOpenCreate] = useState(false);
     const [OpenJoin, setOpenJoin] = useState(false);
-    const classes = useStyles();
+
     const [modalStyle] = React.useState(getModalStyle);
     const [className, setClassName] = useState();
     const [section, setSection] = useState("");
@@ -143,7 +245,15 @@ function Header() {
     return (
         <div className="header">
             <div className="header__left">
-                <MenuIcon className="header__left_icon" />
+                <Fragment>
+                    <Tooltip title="Menu">
+                        <MenuIcon className="header__left_icon" onClick={toggleDrawer(anchor, true)}>{anchor}</MenuIcon>
+                    </Tooltip>
+
+                    <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
+                        {list(anchor)}
+                    </Drawer>
+                </Fragment>
                 <Link to="/"><img className="header__left_img" src={logo} alt="Logo" /></Link>
                 <Link to="/"><img className="header__left_img_small" src={logo_small} alt="Logo" /></Link>
             </div>

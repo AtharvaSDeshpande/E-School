@@ -1,18 +1,26 @@
 export const initialState = {
     user: null,
     selectedClass: null,
+    allClasses: null,
     dashboard: "Doubts",
     doubtModal: false,
     makeAnnouncement: false,
     alertMessage: null,
+    meetID: null,
+    channelID: null,
+    meetControls: {mic: false,video: false, screenShare: false},
 };
 export const actionTypes = {
     SET_USER: "SET_USER",
     SET_CLASS: "SET_CLASS",
+    SET_ALLCLASSES: "SET_ALLCLASSES",
     SET_DASHBOARD: "SET_DASHBOARD",
     SET_MODAL: "SET_MODAL",
     SET_ANNOUNCEMENT: "SET_ANNOUNCEMENT",
     SET_ALERTMESSAGE: "SET_ALERTMESSAGE",
+    SET_MEETID: "SET_MEETID",
+    SET_CHANNELID: "SET_CHANNELID",
+    SET_MEETCONTROLS: "SET_MEETCONTROLS",
 }
 
 const reducer = (state,action) => {
@@ -27,7 +35,13 @@ const reducer = (state,action) => {
             return {
                     ...state,
                     selectedClass: action.selectedClass,
-            }                    
+            }  
+        case actionTypes.SET_ALLCLASSES:
+           
+            return {
+                ...state,
+                allClasses: action.allClasses
+            }                  
         case actionTypes.SET_DASHBOARD:
             console.log(action.dashboard)
             return {

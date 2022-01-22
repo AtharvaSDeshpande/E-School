@@ -8,17 +8,23 @@ import db from '../../firebase';
 import { actionTypes } from '../../reducer';
 
 function LandingPage() {
-    const [{ user, selectedClass }, dispatch] = useStateValue();
+    const [{ user, selectedClass, allClasses }, dispatch] = useStateValue();
     const [classIDs, setClassIDs] = useState([]);
     // var classIDs = [];
     // const [classes,setClasses] = useState();
     var a = true;
     useEffect(() => {
         dispatch({
-            action: actionTypes.SET_CLASS,
+            type: actionTypes.SET_CLASS,
             selectedClass: null
         })
-    }, [dispatch])
+    }, [])
+    useEffect(()=>{
+        dispatch({
+            type: actionTypes.SET_ALLCLASSES,
+            allClasses: classIDs
+        })
+    },[,classIDs])
     useEffect(() => {
         // setClassIDs([])
 
@@ -39,7 +45,9 @@ function LandingPage() {
                     )
                 })
             })
+            
         })
+       
     }, [user?.email])
     //    
 
